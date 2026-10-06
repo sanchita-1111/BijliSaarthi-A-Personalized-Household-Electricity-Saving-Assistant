@@ -1,26 +1,129 @@
-# BijliSaarthi – Clean Streamlit Release
+⚡ BijliSaarthi – A Personalized Household Electricity Saving Assistant
+Overview
+BijliSaarthi is a data-driven household electricity management application designed to help users understand and manage their electricity consumption.
+The project uses Machine Learning and Deep Learning techniques to predict next-hour household electricity consumption and converts the prediction into useful information such as estimated billing, budget comparison, and electricity-saving suggestions.
+🎯 Objectives
+- Predict the next-hour household electricity consumption.
+- Identify daily and weekly electricity usage patterns.
+- Compare different forecasting models.
+- Estimate billing-period electricity usage and indicative electricity bills.
+- Help users understand whether their estimated bill is within their budget.
+- Provide practical electricity-saving suggestions.
+🤖 Models Used
+1. Persistence Model
+A simple baseline that assumes:
+Next-hour consumption ≈ current consumption
 
-### Changes made
-- Removed the **bill photo upload/file-uploader** from the Streamlit app.
-- Removed the **OCR scanning code** and OCR dependencies.
-- Kept manual entry for the bill values: previous reading, current reading, units used, bill amount, billing days and days until next bill.
-- Kept the **one-time household setup** and saved household profile.
-- Removed the consumer-entered **electricity rate (₹/kWh)** field.
-- The app now calculates an **automatic effective bill-based rate = bill amount ÷ units used**. This avoids asking the consumer to guess a tariff. This is a planning rate, not an official tariff.
-- Fixed the logo structure: `bijlisaarthi_logo.png` is in the **same folder as `app.py`**.
-- Kept the budget estimate, appliance profile, saving plan and Saarthi chat.
+2. Multiple Linear Regression (MLR)
+MLR uses features such as:
+- Current consumption
+- 24-hour lag
+- 168-hour lag
+- Cyclical time features
+3. LSTM
+Long Short-Term Memory (LSTM) is used to learn sequential patterns from a 24-hour consumption sequence and predict the next hour.
+4. Hybrid Model
+The project combines MLR and LSTM predictions:
+Hybrid Prediction = 0.62 × MLR Prediction + 0.38 × LSTM Prediction
 
-### Why there is no single universal electricity rate
-Electricity tariffs are not one fixed India-wide number. They vary by DISCOM, state, consumer category and consumption slab. MSEDCL/Maharashtra, for example, uses slab-based residential charges. Therefore this version does not hard-code a misleading universal tariff; it derives a practical effective rate from the user's own bill.
+The weights were selected using validation data.
+📊 Model Evaluation
+The models are evaluated using:
+- MAE – Mean Absolute Error
+- MSE – Mean Squared Error
+- RMSE – Root Mean Squared Error
+- R² – Coefficient of Determination
+Reported results:
+Model	MAE	MSE	RMSE	R²
+Persistence	0.136321	0.083738	0.289376	0.575166
+MLR	0.138836	0.068374	0.261484	0.653115
+LSTM	0.155680	0.081905	0.286191	0.687931
+Hybrid	0.175677	0.094917	0.308086	0.638345
 
-### Streamlit deployment
-Upload the contents of this folder to a **new GitHub repository**. Keep these files together:
 
-- `app.py`
-- `bijlisaarthi_logo.png`
-- `requirements.txt`
-- `README.md`
+Important: No single model performs best on every metric. MLR has the lowest MSE and RMSE, while LSTM has the highest R².
+🏠 Application
+The project includes a Streamlit-based application where users can provide recent electricity/billing information.
+The application can:
+1. Accept electricity meter/bill information.
+2. Use OCR-assisted bill information extraction where applicable.
+3. Allow users to confirm extracted values.
+4. Estimate electricity consumption.
+5. Estimate an indicative bill.
+6. Compare the estimate with the user's budget.
+7. Provide electricity-saving suggestions.
+Note: Billing and savings values are estimates and should not be treated as official electricity bills.
 
-Then deploy with:
-- Branch: `main`
-- Main file path: `app.py`
+🛠️ Technologies Used
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- TensorFlow / Keras
+- Streamlit
+- PIL / Pillow
+- OCR
+- Data visualization libraries
+📂 Project Structure
+BijliSaarthi/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── data/
+│   └── electricity_data.csv
+│
+├── notebooks/
+│   └── model_development.ipynb
+│
+└── presentation/
+    └── BijliSaarthi_Presentation.pptx
+
+The exact files may vary depending on the version of the project uploaded to the repository.
+🔄 Project Workflow
+Electricity Data
+       ↓
+Data Auditing & Preprocessing
+       ↓
+Feature Engineering
+       ↓
+Chronological Data Split
+       ↓
+ ┌───────────────┐
+ │               │
+MLR             LSTM
+ │               │
+ └───────┬───────┘
+         ↓
+   Hybrid Fusion
+         ↓
+Next-Hour Prediction
+         ↓
+Billing & Budget Estimation
+         ↓
+Saving Suggestions
+         ↓
+Streamlit Application
+
+🔬 Research Contribution
+The main contribution of BijliSaarthi is not only forecasting electricity consumption, but connecting forecasting with billing, budgeting, and practical electricity-saving guidance in one consumer-oriented workflow.
+⚠️ Limitations
+- Predictions depend on the quality and availability of electricity consumption data.
+- OCR extraction may require user confirmation.
+- Billing calculations are indicative estimates.
+- The hybrid model does not outperform every individual model on every metric.
+- Household behaviour and unexpected usage changes can affect predictions.
+🚀 Future Scope
+Future improvements can include:
+- More household-level data.
+- Appliance-level consumption analysis.
+- Real-time smart-meter integration.
+- More advanced forecasting models.
+- Transformer-based time-series models.
+- More personalized recommendations.
+- Improved bill and tariff handling.
+👩‍💻 Author
+Sanchita Navnath Pohkar
+TY B.Sc. Data Science & Analytics
+R. A. Podar College of Commerce & Economics, Mumbai
