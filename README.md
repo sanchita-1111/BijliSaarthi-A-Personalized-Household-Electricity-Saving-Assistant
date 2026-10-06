@@ -1,7 +1,9 @@
 ⚡ BijliSaarthi – A Personalized Household Electricity Saving Assistant
+
 Overview
 BijliSaarthi is a data-driven household electricity management application designed to help users understand and manage their electricity consumption.
 The project uses Machine Learning and Deep Learning techniques to predict next-hour household electricity consumption and converts the prediction into useful information such as estimated billing, budget comparison, and electricity-saving suggestions.
+
 🎯 Objectives
 - Predict the next-hour household electricity consumption.
 - Identify daily and weekly electricity usage patterns.
@@ -9,6 +11,7 @@ The project uses Machine Learning and Deep Learning techniques to predict next-h
 - Estimate billing-period electricity usage and indicative electricity bills.
 - Help users understand whether their estimated bill is within their budget.
 - Provide practical electricity-saving suggestions.
+  
 🤖 Models Used
 1. Persistence Model
 A simple baseline that assumes:
