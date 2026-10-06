@@ -64,48 +64,6 @@ Note: Billing and savings values are estimates and should not be treated as offi
 - PIL / Pillow
 - OCR
 - Data visualization libraries
-📂 Project Structure
-BijliSaarthi/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-│
-├── data/
-│   └── electricity_data.csv
-│
-├── notebooks/
-│   └── model_development.ipynb
-│
-└── presentation/
-    └── BijliSaarthi_Presentation.pptx
-
-The exact files may vary depending on the version of the project uploaded to the repository.
-🔄 Project Workflow
-Electricity Data
-       ↓
-Data Auditing & Preprocessing
-       ↓
-Feature Engineering
-       ↓
-Chronological Data Split
-       ↓
- ┌───────────────┐
- │               │
-MLR             LSTM
- │               │
- └───────┬───────┘
-         ↓
-   Hybrid Fusion
-         ↓
-Next-Hour Prediction
-         ↓
-Billing & Budget Estimation
-         ↓
-Saving Suggestions
-         ↓
-Streamlit Application
-
 🔬 Research Contribution
 The main contribution of BijliSaarthi is not only forecasting electricity consumption, but connecting forecasting with billing, budgeting, and practical electricity-saving guidance in one consumer-oriented workflow.
 ⚠️ Limitations
@@ -123,6 +81,7 @@ Future improvements can include:
 - Transformer-based time-series models.
 - More personalized recommendations.
 - Improved bill and tariff handling.
+
 👩‍💻 Author
 Sanchita Navnath Pohkar
 TY B.Sc. Data Science & Analytics
